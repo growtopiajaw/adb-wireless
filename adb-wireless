@@ -1,0 +1,57 @@
+#!/bin/bash
+
+clear screen
+
+echo -e "adb-wireless v1.0 Copyright © 2018 Microsoft10 4-3-2018"
+
+echo
+
+{
+if [ ! -f /bin/adb ]; then
+    sudo cp ./adb /bin
+fi
+}
+
+echo -e "Usage:"
+echo -e "Connect device with adb wirelessly via Wi-Fi"
+
+echo
+
+{
+read -p "Are you sure you want to proceed? (Y/n) : " -n 1 -r
+if [[ ! $REPLY =~ ^[Yy]$ ]]
+then
+    exit
+fi
+}
+
+echo
+echo
+
+read -rsp $'Press enter to set TCP to PORT 5555\n'
+
+echo
+
+echo -e "Setting TCP to PORT 5555..."
+
+{
+  adb tcpip 5555
+} &> /dev/null
+
+echo
+
+read -rsp $'Press enter to connect device via IP 192.168.43.1 with PORT 5555\n'
+
+echo
+
+echo -e "Connecting device via IP 192.168.43.1 with PORT 5555..."
+
+{
+  adb connect 192.168.43.1:5555
+} &> /dev/null
+
+echo
+
+read -rsp $'Press enter to exit\n'
+
+exit 0
