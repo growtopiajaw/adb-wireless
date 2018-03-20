@@ -2,56 +2,84 @@
 
 clear screen
 
-echo -e "adb-wireless v1.0 Copyright © 2018 Microsoft10 4-3-2018"
+echo -e "adb-wireless v2.0 Copyright © 2018 Microsoft10 6-3-2018"
 
 echo
 
-{
-if [ ! -f /bin/adb ]; then
-    sudo cp ./adb /bin
-fi
+# adb binary check
+test_cmd() {
+    if which "$1" &>/dev/null
+    then
+        true
+    else
+        echo "Error: cannot execute \"$1\", install either this '\"$2\"' or this '\"$3\"'">&2
+        exit 2
+    fi
 }
 
+test_cmd adb  adb android-tools-adb
+
+clear screen
+
+echo -e "adb-wireless v2.0 Copyright © 2018 Microsoft10 6-3-2018"
+
+echo
+
+# Script usage
 echo -e "Usage:"
 echo -e "Connect device with adb wirelessly via Wi-Fi"
 
 echo
 
-{
-read -p "Are you sure you want to proceed? (Y/n) : " -n 1 -r
-if [[ ! $REPLY =~ ^[Yy]$ ]]
-then
-    exit
-fi
-}
-
-echo
-echo
-
-read -rsp $'Press enter to set TCP to PORT 5555\n'
+echo -e "Instructions:"
+echo -e "1. Connect your device to your computer via USB"
+echo -e "2. Make sure that USB debugging is enabled in [Device--> Settings--> Developer options]"
+echo -e "3. Make sure that your computer and your device are connected to Wi-Fi or your Mobile Hotspot"
 
 echo
 
-echo -e "Setting TCP to PORT 5555..."
+echo -e "NOTE: This is mandatory. Before you connect your device with adb via Wi-Fi, you must connect it via USB to your computer first. Once adb is connected via Wi-Fi, you can remove the USB"
 
+echo
+
+read -p "Have you read the above instructions? If yes, press ENTER to continue..."
+
+clear screen
+
+echo -e "adb-wireless v2.0 Copyright © 2018 Microsoft10 6-3-2018"
+
+# Mandatory, to prevent adb from refusing to connect to device
 {
   adb tcpip 5555
 } &> /dev/null
 
 echo
 
-read -rsp $'Press enter to connect device via IP 192.168.43.1 with PORT 5555\n'
+echo -e "What is your device's IP address?"
+echo -e "GNOME:"
+echo -e "[Computer--> Network--> Gear icon--> You can choose either Default Route / DNS"
+echo -e "Example: 192.168.43.224"
+echo -e "Mandatory to input your own IP address or else it will fail to connect"
+read -p ":" IP_ADDRESS
 
 echo
 
-echo -e "Connecting device via IP 192.168.43.1 with PORT 5555..."
-
-{
-  adb connect 192.168.43.1:5555
-} &> /dev/null
+if [ -z "$IP_ADDRESS" ]
+then
+    echo -e "Invalid input, quitting..."
+    exit 1
+fi
 
 echo
 
-read -rsp $'Press enter to exit\n'
+echo -e "Connecting device via IP $IP_ADDRESS..."
+
+# {
+  adb connect $IP_ADDRESS
+# } &> /dev/null
+
+echo
+
+read -p "Press ENTER to exit"
 
 exit 0
