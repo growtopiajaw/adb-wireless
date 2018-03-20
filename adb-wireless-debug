@@ -2,26 +2,26 @@
 
 clear screen
 
-echo -e "adb-wireless v2.1 Copyright © 2018 Microsoft10 9-3-2018"
+echo -e "adb-wireless v2.1-debug Copyright © 2018 Microsoft10 9-3-2018"
 
 echo
 
 # adb binary check
 test_cmd() {
-    if which "$1" &>/dev/null
+    if which "$1" # &>/dev/null
     then
         true
     else
-        echo "Error: cannot execute \"$1\", install either this '\"$2\"' or this '\"$3\"'">&2
+        echo "Error: cannot execute \"$1\", install either this '\"$2\"' or this '\"$3\"'" #>&2
         exit 2
     fi
 }
 
-test_cmd adb adb android-tools-adb
+test_cmd adb  adb android-tools-adb
 
 clear screen
 
-echo -e "adb-wireless v2.1 Copyright © 2018 Microsoft10 9-3-2018"
+echo -e "adb-wireless v2.1-debug Copyright © 2018 Microsoft10 9-3-2018"
 
 echo
 
@@ -47,14 +47,14 @@ read -p "Have you read the above instructions? If yes, press ENTER to continue..
 
 clear screen
 
-echo -e "adb-wireless v2.1 Copyright © 2018 Microsoft10 9-3-2018"
+echo -e "adb-wireless v2.1-debug Copyright © 2018 Microsoft10 9-3-2018"
 
 echo
 
 # Mandatory, to prevent adb from refusing to connect to device
-{
+# {
   adb tcpip 5555
-} &> /dev/null
+# } &> /dev/null
 
 echo
 
@@ -82,9 +82,9 @@ echo -e "Connecting device via IP $IP_ADDRESS..."
 
 echo
 
-{
+# {
   adb connect $IP_ADDRESS
-} &> /dev/null
+# } &> /dev/null
 
 echo
 
