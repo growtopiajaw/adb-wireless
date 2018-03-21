@@ -86,7 +86,7 @@ test_cmd_color lolcat lolcat
 
 clear screen
 
-echo -e "adb-wireless v2.1-color Copyright © 2018 Microsoft10 9-3-2018" | lolcat
+echo -e "adb-wireless v2.1-color Copyright © 2018 Microsoft10 21-3-2018" | lolcat
 
 echo
 
@@ -112,7 +112,7 @@ read -p "$YELLOWB Have you read the above instructions? If yes, press ENTER to c
 
 clear screen
 
-echo -e "adb-wireless v2.1-color Copyright © 2018 Microsoft10 9-3-2018" | lolcat
+echo -e "adb-wireless v2.1-color Copyright © 2018 Microsoft10 21-3-2018" | lolcat
 
 echo
 
