@@ -1,0 +1,161 @@
+#!/bin/bash
+
+clear screen
+
+# tput setab
+
+BLACKB=$(tput setab 0)
+REDB=$(tput setab 1)
+GREENB=$(tput setab 2)
+YELLOWB=$(tput setab 3)
+BLUEB=$(tput setab 4)
+MAGENTAB=$(tput setab 5)
+CYANB=$(tput setab 6)
+WHITEB=$(tput setab 7)
+
+# tput setaf
+
+BLACKF=$(tput setab 0)
+REDF=$(tput setab 1)
+GREENF=$(tput setab 2)
+YELLOWF=$(tput setab 3)
+BLUEF=$(tput setab 4)
+MAGENTAF=$(tput setab 5)
+CYANF=$(tput setab 6)
+WHITEF=$(tput setab 7)
+
+# tput bold
+
+TBOLD=$(tput bold)
+
+# tput dim
+
+TDIM=$(tput dim)
+
+# tput smul
+
+TUL=$(tput smul)
+
+# tput rmul
+
+TEUL=$(tput rmul)
+
+# tput rev
+
+TREV=$(tput rev)
+
+# tput smso
+
+TSTD=$(tput smso)
+
+# tput rmso
+
+TESTD=$(tput rmso)
+
+# tput sgr0
+
+TCLS=$(tput sgr0)
+
+# adb binary check
+test_cmd() {
+    if which "$1" &>/dev/null
+    then
+        true
+    else
+        echo
+        echo "$REDB ERROR$TCLS: cannot execute $YELLOWB\"$1\"$TCLS, install either this $YELLOWB\"$2\"$TCLS or this $YELLOWB\"$3\"$TCLS">&2
+        exit 2
+    fi
+}
+
+# lolcat command installed?
+test_cmd_color() {
+    if which "$1" &>/dev/null
+    then
+        true
+    else
+        echo
+        echo "$REDB ERROR$TCLS: cannot execute $YELLOWB\"$1\"$TCLS, install the package $YELLOWB\"$2\"$TCLS if you want to this color version">&2
+        exit 2
+    fi
+}
+
+test_cmd adb adb android-tools-adb
+
+test_cmd_color lolcat lolcat
+
+clear screen
+
+echo -e "adb-wireless v2.1-color Copyright © 2018 Microsoft10 9-3-2018" | lolcat
+
+echo
+
+# Script usage
+echo -e "Usage:" | lolcat
+echo -e "Connect device with adb wirelessly via Wi-Fi" | lolcat
+
+echo
+
+echo -e "Instructions:" | lolcat
+echo -e "$YELLOWB 1. Connect your device to your computer via USB$TCLS"
+echo -e "$YELLOWB 2. Make sure that USB debugging is enabled in [Device--> Settings--> Developer options]$TCLS"
+echo -e "$YELLOWB 3. Make sure that your computer and your device are connected to Wi-Fi or your Mobile Hotspot$TCLS"
+
+echo
+
+echo -e "$REDB NOTE: This is mandatory. Before you connect your device with adb via Wi-Fi, you must connect it via USB to your computer first.$TCLS"
+echo -e "$REDB Once adb is connected via Wi-Fi, you can remove the USB$TCLS"
+
+echo
+
+read -p "$YELLOWB Have you read the above instructions? If yes, press ENTER to continue...$TCLS"
+
+clear screen
+
+echo -e "adb-wireless v2.1-color Copyright © 2018 Microsoft10 9-3-2018" | lolcat
+
+echo
+
+# Mandatory, to prevent adb from refusing to connect to device
+{
+  adb tcpip 5555
+} &> /dev/null
+
+echo
+
+echo -e "What is your device's IP address?" | lolcat
+
+echo
+
+echo -e "GNOME Desktop Environment:" | lolcat
+
+echo
+
+echo -e "[Computer--> Network--> Gear icon--> You can choose either Default Route or DNS as your IP address" | lolcat
+echo -e "Example: 192.168.xx.xx" | lolcat
+echo -e "$YELLOWB It is mandatory to input your own IP address or else it will fail to connect$TCLS"
+read -p ":" IP_ADDRESS
+
+echo
+
+if [ -z "$IP_ADDRESS" ]
+then
+    echo -e "$REDB Invalid input, quitting...$TCLS"
+    exit 1
+fi
+
+echo
+
+echo -e "Connecting device via IP $IP_ADDRESS..." | lolcat
+
+echo
+
+{
+  adb connect $IP_ADDRESS
+} &> /dev/null
+
+echo
+
+read -p "$YELLOWB Press ENTER to exit$TCLS"
+
+exit 0
