@@ -31,6 +31,6 @@ Alternatively, if you want the script to be more verbose, simply just run the sc
 
 -----------------------------------------
 
-adb-wireless Copyright © 2018 Microsoft10
+adb-wireless Copyright © 2018-2020 Microsoft10
 
 E-mail me at growtopiajaw@gmail.com if you have any questions.
