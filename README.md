@@ -33,4 +33,4 @@ Alternatively, if you want the script to be more verbose, simply just run the sc
 
 adb-wireless Copyright © 2018-2021 Microsoft10
 
-E-mail me at growtopiajaw@gmail.com if you have any questions.
+E-mail me at growtopiajaw AT gmail.com if you have any questions.
